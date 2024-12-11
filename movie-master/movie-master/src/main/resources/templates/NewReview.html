@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>관람평 작성</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/premium-photo/awards-show-background-with-red-curtains-open-on-black-curtain_42071-943.jpg');
+            background-size: cover;
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .container {
+            margin-top: 100px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+        }
+
+        #content {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #submit {
+            width: 150px;
+            font-size: 16px;
+            font-weight : 500;
+            background-color: #000000;
+            border : none;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            width: 55px;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .logo-container span {
+            font-size: 40px;
+            font-weight: 700;
+            font-family: 'Georgia';
+            color: #000000;
+        }
+
+        h2 {
+            color: #000000;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <a href="/movies" style="text-decoration: none; color: #007bff;">
+                <span>MEGA</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/207/207033.png" alt="Logo">
+                <span style="font-size: 40px; font-weight: 600; font-family: 'Georgia';">MOVIE</span>
+            </a>
+        </div>
+        <h2>감상평 작성</h2>
+        <textarea id="content" class="form-control" cols="30" rows="8" placeholder="영화 감상평을 작성해주세요."></textarea>
+        <button id="submit" class="btn btn-primary">감상평 등록하기</button>
+    </div>
+    <script>
+        var submitBtn = document.getElementById("submit");
+        submitBtn.addEventListener("click", event => {
+            console.log("Submit");
+            var content = document.getElementById("content").value;
+
+            fetch(`/api/reviews`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        content: content
+                    })
+                })
+                .then(() => {
+                    alert("감상평이 성공적으로 등록되었습니다! 감사합니다.");
+                    history.back();
+                });
+        });
+    </script>
+</body>
+</html>

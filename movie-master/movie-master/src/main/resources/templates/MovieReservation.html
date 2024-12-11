@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>영화 예매</title>
+</head>
+<body>
+    <br><br><br>
+    <div align="center">
+        <h1>🎁 예약 내역</h1>
+
+        <p>일자: <span th:text="${date}"></span></p>
+        <p>시간: <span th:text="${time}"></span></p>
+        <p>좌석: <span th:text="${seatRow + '열 ' + seatColumn + '번'}"></span></p>
+        예매가 완료되었습니다.
+        <a href="/movies" class="btn btn-danger signup-btn">홈으로</a>
+    </div>
+</body>
+</html>

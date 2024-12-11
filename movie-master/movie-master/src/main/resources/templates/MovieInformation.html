@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${movies.name}">Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .movie-card {
+            transition: transform 0.2s;
+            display: flex;
+            align-items: left;
+            border: 1px solid #ddd;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        .movie-card-1 {
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
+            color: white;
+            height: 700px;
+            position: relative;
+        }
+
+        .movie-card-2 {
+            top: 340px;
+            left: 460px;
+            background-color: none;
+            position: absolute;
+            width : 800px;
+            color: #ffffff;
+        }
+
+        .movie-img {
+            height: 450px;
+            width: 300px;
+            position: absolute;
+            top: 70px;
+            right: 500px;
+            border-radius : 5px;
+        }
+
+        .h5 {
+            font-size: 36px
+        }
+
+        .movie-footer {
+            background-color: #f8f9fa;
+        }
+
+        .btn-custom {
+        }
+
+        .btn-custom-1 {
+            font-size: 16px;
+            position: absolute;
+            top: 560px;
+            right: 700px;
+            border: none;
+            border: 1px solid white;
+            background-color: transparent;
+            width: 95px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .btn-custom-2 {
+            font-size: 13px;
+            position: absolute;
+            top: 560px;
+            right: 600px;
+            border: none;
+            border: 1px solid white;
+            background-color: transparent;
+            width: 95px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-custom-3 {
+            font-size: 13px;
+            position: absolute;
+            top: 560px;
+            right: 500px;
+            border: none;
+            border: 1px solid white;
+            background-color: transparent;
+            width: 95px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .movie-title {
+            font-size: 48px;
+            font-weight: 500;
+            position: absolute;
+            top: 100px;
+            left : 460px;
+        }
+
+        .card-text-1 {
+            position: absolute;
+            font-weight: 400;
+            font-size : 18px;
+            color: #9e9e9e;
+            margin-left: 470px;
+            top: 70px;
+        }
+
+        .card-text-2 {
+            position: absolute;
+            font-weight: 400;
+            font-size : 18px;
+            color: #ffffff;
+            margin-left: 470px;
+            top: 170px;
+        }
+
+        .card-text-3 {
+            font-weight: 400;
+            font-size : 18px;
+            color: #ffffff;
+            margin-left: 470px;
+            position: absolute;
+            bottom: 140px;
+        }
+
+        .card-text-4 {
+            font-weight: 400;
+            font-size : 18px;
+            color: #ffffff;
+            margin-left: 470px;
+            position: absolute;
+            bottom: 60px;
+        }
+
+        .card-text-5 {
+            font-weight: 400;
+            font-size : 18px;
+            color: #ffffff;
+            margin-left: 470px;
+            position: absolute;
+            bottom: 100px;
+        }
+
+        .card-text-story{
+            font-size : 18px;
+        }
+    </style>
+</head>
+<header class="container-fluid py-3" th:unless="${isLoggedIn}" style="background-color: transparent;">
+    <div class="container d-flex justify-content-end align-items-center">
+        <a href="/movies" style="text-decoration: none; color: #000; display: flex; align-items: center;">
+            <span style="font-size: 40px; font-weight: 700; font-family: 'Georgia' ">MEGA</span>
+            <img src="https://cdn-icons-png.flaticon.com/512/207/207033.png" alt="Logo" style="width: 55px; margin-right: -15px; margin-left: -15px">
+            <span style="font-size: 40px; font-weight: 600; font-family: 'Georgia'; margin-right: 720px;">MOVIE</span>
+        </a>
+
+        <div class="header-links">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828415.png" alt="Login Icon" style="width: 30px; ">
+            <a href="/login" class="btn btn-outline-dark me-2">로그인</a>
+            <img src="https://static.thenounproject.com/png/1480850-200.png" alt="join Icon" style="width: 30px; ">
+            <a href="/join" class="btn btn-outline-dark">회원가입</a>
+        </div>
+    </div>
+</header>
+<header class="container-fluid py-3" th:if="${isLoggedIn}" style="background-color: transparent;">
+    <div class="container d-flex justify-content-end align-items-center">
+        <a href="/movies" style="text-decoration: none; color: #000; display: flex; align-items: center;">
+            <span style="font-size: 40px; font-weight: 700; font-family: 'Georgia' ">MEGA</span>
+            <img src="https://cdn-icons-png.flaticon.com/512/207/207033.png" alt="Logo" style="width: 55px; margin-right: -15px; margin-left: -15px">
+            <span style="font-size: 40px; font-weight: 600; font-family: 'Georgia'; margin-right: 720px;">MOVIE</span>
+        </a>
+
+        <img src="https://cdn-icons-png.flaticon.com/512/182/182448.png" alt="Login Icon" style="width: 30px; margin-right: 1px;">
+        <a href="javascript:void(0);" onclick="logout()" class="btn btn-custom">로그아웃</a>
+        <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="Login Icon" style="width: 30px; margin-right: 1px;">
+        <a class="btn btn-custom me-2" th:if="${isLoggedIn}" th:href="@{/users/modify/{id}(id=${user.id})}">마이페이지</a>
+    </div>
+</header>
+<body>
+    <div class="row row-cols-1 g-4">
+        <div th:each="item : ${movies}" class="col mb-4">
+            <div class="movie-card-1 h-150 border-0 shadow">
+                <div class="movie-details">
+                    <h5 class="movie-title" th:text="${item.name}"></h5>
+                    <p class="card-text-3"><strong>감독 </strong> <span th:text="${item.director}"></span></p>
+                    <p class="card-text-4"><strong>배우 </strong> <span th:text="${item.actor}"></span></p>
+                    <p class="card-text-1"><strong># </strong> <span th:text="${item.type}"></span></p>
+                    <p class="card-text-5"><strong>상영시간 </strong> <span th:text="${item.time}"></span></p>
+                    <p class="card-text-2"><span th:text="${item.releaseDate}"></span><strong> 개봉 </strong> </p>
+                    <a th:href="@{/move-reservation(movieId=${movies.id})}" class="btn btn-danger btn-custom-1">예매하기</a>
+                    <a th:href="@{/new-reviews(movieId=${movies.id})}" class="btn btn-primary btn-custom-2">관람평작성</a>
+                    <a th:href="@{/reviews/{movieId}/reviews(movieId=${movies.id})}" class="btn btn-secondary btn-custom-3">관람평보기</a>
+                </div>
+                <img th:src="${item.imageUrl}" alt="Movie Image" class="movie-img rounded">
+            </div>
+        </div>
+
+        <div th:each="item : ${movies}" class="col mb-4">
+            <div class="movie-card-2 h-150 border-0">
+                <div class="move-details">
+                    <button id="toggleButton" style="font-size: 19px; font-weight: 700; border:none; background-color: transparent; color:#FEFFC2;">줄거리 확인하기 </button>
+                    <p class="card-text-story" id="story" style="display: none; "><span th:text="${item.story}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            var story = document.getElementById("story");
+            var movieCard2 = document.querySelector(".movie-card-2");
+
+            if (story.style.display === "none") {
+                story.style.display = "block";
+                movieCard2.style.height = "auto";
+            } else {
+                story.style.display = "none";
+                movieCard2.style.height = "150px";
+            }
+        });
+    </script>
+    <script>
+        function logout() {
+            fetch('/api/logout', {
+                method: 'POST'
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
